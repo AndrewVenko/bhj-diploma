@@ -1,3 +1,4 @@
+
 /**
  * Класс User управляет авторизацией, выходом и
  * регистрацией пользователя из приложения
@@ -8,11 +9,10 @@ class User {
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
-  URL = 'https://example.com/user';
+  static URL = '/user';
 
   static setCurrent(user) {
-    const userData = "{\"id\":" + `${user.id}` + ",\"name\":" + "\"" + `${user.name}` + "\"}";
-    localStorage.user = userData;
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   /**
@@ -20,10 +20,7 @@ class User {
    * пользователе из локального хранилища.
    * */
   static unsetCurrent() {
-    const current = this.current();
-    if(current !== undefined){
-      localStorage.removeItem(current);
-    };
+    localStorage.removeItem('user');
   };
 
   /**
@@ -31,10 +28,8 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    const userData = localStorage.user;
-    if(userData !== undefined){
-      const current = JSON.parse(userData);
-      return current;
+    if(localStorage.getItem('user')){
+      return JSON.parse(localStorage.getItem('user'));;
     } else{
       return undefined;
     };
@@ -45,24 +40,17 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    const response = callback;
-    if(response.success === true){
-      this.setCurrent({
-        "id": response.user.id,
-        "name": response.user.name,
-      });
-    } else{
-      this.unsetCurrent();
-      alert(response.error);
-    };
+    const user = callback.user;
     createRequest({
-      url: this.URL + '/current',
+      url: URL + '/current',
       method: 'GET',
-      data: {
-        email: response.user.email,
-        password: response.user.password,
+      data: user,
+      callback: (err, response) =>{
+        if (response && response.user) {
+          this.setCurrent(response.user);
+        };
+        callback(err, response);
       },
-      callback: callback,
     });
   };
 
@@ -77,7 +65,7 @@ class User {
       url: this.URL + '/login',
       method: 'POST',
       responseType: 'json',
-      data,
+      data: data,
       callback: (err, response) => {
         if (response && response.user) {
           this.setCurrent(response.user);
@@ -94,34 +82,17 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    const response = callback;
-    if(response.success === true){
-      data = {
-        name: response.user.name,
-        email: response.user.email,
-        password: response.user.password,
-      };
-      this.setCurrent({
-        id: response.user.id,
-        name: response.user.name,
-      });
+    if(callback.response.success === true){
       createRequest({
-        url: this.URL + '/register',
+        url: URL + '/register',
         method: 'POST',
-        data: {
-          email: response.user.email,
-          password: response.user.password,
-        },
-        callback: callback,
+        data: data,
+        callback: callback(err, response),
       });
+      User.setCurrent(data);
     } else{
-      if(response.email !== undefined && response.password !== undefined){
-        alert(response.email, response.password);
-      } else if(response.email !== undefined){
-        alert(response.email);
-      } else if(response.password !== undefined){
-        alert(response.password);
-      };
+      alert(callback.err.email);
+      alert(callback.err.password);
     };
   };
 
@@ -130,20 +101,13 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(callback) {
-    const response = callback;
-    if(response.success){
+    if(callback.response.success === true){
       createRequest({
-        url: this.URL + '/logout',
+        url: URL + '/logout',
         method: 'POST',
-        data: {
-          email: response.user.email,
-          password: response.user.password,
-        },
-        callback: callback,
+        callback: callback(err, response),
       });
-      this.unsetCurrent();
-    } else{
-      alert('Ошибка!');
+      User.unsetCurrent();
     };
   };
 };

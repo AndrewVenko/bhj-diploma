@@ -13,16 +13,24 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-
-  }
+    if(element){
+      this.element;
+      this.registerEvents();
+    } else{
+      throw new Error('Пустой элемент!');
+    };
+  };
 
   /**
    * Необходимо запретить отправку формы и в момент отправки
    * вызывает метод submit()
    * */
   registerEvents() {
-
-  }
+    document.forms['new-account-form'].addEventListener('submit', function(event){
+      event.preventDefault();
+      this.submit();
+    });
+  };
 
   /**
    * Преобразует данные формы в объект вида
@@ -32,8 +40,10 @@ class AsyncForm {
    * }
    * */
   getData() {
-
-  }
+    const formData = new FormData(document.forms['new-account-form']);
+    const dataJSON = JSON.stringify(formData);
+    return dataJSON;
+  };
 
   onSubmit(options){
 
@@ -44,6 +54,7 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-
+    const data = this.getData();
+    this.onSubmit(data);
   }
 }

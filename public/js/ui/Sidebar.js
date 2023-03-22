@@ -18,8 +18,22 @@ class Sidebar {
    * при нажатии на кнопку .sidebar-toggle
    * */
   static initToggleButton() {
-
-  }
+    const bodySidebar = document.body;
+    const buttonSidebar = document.querySelector('.sidebar-toggle');
+    buttonSidebar.addEventListener('click', function(){
+      if(bodySidebar.classList.contains('sidebar-open')){
+        bodySidebar.classList.remove.apply(
+          bodySidebar.classList,
+        ['sidebar-open', 'sidebar-collapse']
+      );
+      } else{
+        bodySidebar.classList.add.apply(
+          bodySidebar.classList,
+        ['sidebar-open', 'sidebar-collapse']
+      );
+      };
+    });
+  };
 
   /**
    * При нажатии на кнопку входа, показывает окно входа
@@ -29,6 +43,26 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
+    const register = document.querySelector('.menu-item_register');
+    const login = document.querySelector('.menu-item_login');
+    const logout = document.querySelector('.menu-item_logout');
 
+    register.addEventListener('click', function(event){
+      event.preventDefault();
+      Modal.open(App.getModal('#modal-register'));
+    });
+
+    login.addEventListener('click', function(event){
+      event.preventDefault();
+      Modal.open(App.getModal('#modal-login'));
+    });
+
+    logout.addEventListener('click', function(event, callback){
+      event.preventDefault();
+      User.logout(callback);
+      if(callback.response.success = true){
+        App.setState('init');
+      };
+    });
   }
 }
