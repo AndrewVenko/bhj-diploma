@@ -14,7 +14,11 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    if(!element){
+      throw new Error('Пустой элемент!');
+    };
+    this.element = element;
+    this.update();
   }
 
   /**
@@ -25,7 +29,10 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
+    const create = document.querySelector('.create-account');
+    create.addEventListener('click', () =>{
+      App.getModal('#modal-new-account');
+    })
   }
 
   /**

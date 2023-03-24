@@ -13,12 +13,11 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-    if(element){
-      this.element;
-      this.registerEvents();
-    } else{
+    if(!element){
       throw new Error('Пустой элемент!');
     };
+    this.element = element;
+    this.registerEvents();
   };
 
   /**
@@ -26,7 +25,7 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
-    document.forms['new-account-form'].addEventListener('submit', function(event){
+    document.forms[this.element.id].addEventListener('submit', (event) =>{
       event.preventDefault();
       this.submit();
     });

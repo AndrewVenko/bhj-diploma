@@ -28,11 +28,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    if(localStorage.getItem('user')){
-      return JSON.parse(localStorage.getItem('user'));;
-    } else{
-      return undefined;
-    };
+    return JSON.parse(localStorage.getItem('user'));
   };
 
   /**
@@ -40,14 +36,14 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    const user = callback.user;
     createRequest({
-      url: URL + '/current',
+      url: this.URL + '/current',
       method: 'GET',
-      data: user,
       callback: (err, response) =>{
         if (response && response.user) {
           this.setCurrent(response.user);
+        } else{
+          this.unsetCurrent();
         };
         callback(err, response);
       },
@@ -65,13 +61,15 @@ class User {
       url: this.URL + '/login',
       method: 'POST',
       responseType: 'json',
-      data: data,
-      callback: (err, response) => {
+      data,
+      callback: (err, response) =>{
         if (response && response.user) {
           this.setCurrent(response.user);
+        } else{
+          alert(err);
         };
         callback(err, response);
-      }
+      },
     });
   }
 
@@ -82,18 +80,20 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    if(callback.response.success === true){
-      createRequest({
-        url: URL + '/register',
-        method: 'POST',
-        data: data,
-        callback: callback(err, response),
-      });
-      User.setCurrent(data);
-    } else{
-      alert(callback.err.email);
-      alert(callback.err.password);
-    };
+    createRequest({
+      url: this.URL + '/register',
+      method: 'POST',
+      data,
+      callback: (err, response) =>{
+        if (response.success === true) {
+          User.setCurrent(data);
+        } else{
+          alert(err.email);
+          alert(err.password);
+        };
+        callback(err, response);
+      },
+    });
   };
 
   /**
@@ -103,7 +103,7 @@ class User {
   static logout(callback) {
     if(callback.response.success === true){
       createRequest({
-        url: URL + '/logout',
+        url: this.URL + '/logout',
         method: 'POST',
         callback: callback(err, response),
       });

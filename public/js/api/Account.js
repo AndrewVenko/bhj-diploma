@@ -4,16 +4,15 @@
  * Имеет свойство URL со значением '/account'
  * */
 class Account extends Entity {
-  static URL = URL + '/account';
+  static URL = '/account';
   /**
    * Получает информацию о счёте
    * */
-  static get(id = '', callback){
+  static get(id, callback){
     createRequest({
-      id: id,
-      url: this.URL,
+      url: this.URL + '/' + id,
       method: 'GET',
-      callback: callback,
+      callback,
     });
   };
 };

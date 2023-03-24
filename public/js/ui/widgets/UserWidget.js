@@ -12,11 +12,10 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-    if(element){
-      this.element;
-    } else{
+    if(!element){
       throw new Error('Пустой элемент!');
     };
+    this.elemen = element;
   }
 
   /**

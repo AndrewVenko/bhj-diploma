@@ -20,7 +20,7 @@ class Sidebar {
   static initToggleButton() {
     const bodySidebar = document.body;
     const buttonSidebar = document.querySelector('.sidebar-toggle');
-    buttonSidebar.addEventListener('click', function(){
+    buttonSidebar.addEventListener('click', () =>{
       if(bodySidebar.classList.contains('sidebar-open')){
         bodySidebar.classList.remove.apply(
           bodySidebar.classList,
@@ -47,17 +47,19 @@ class Sidebar {
     const login = document.querySelector('.menu-item_login');
     const logout = document.querySelector('.menu-item_logout');
 
-    register.addEventListener('click', function(event){
+    register.addEventListener('click', (event) => {
       event.preventDefault();
-      Modal.open(App.getModal('#modal-register'));
+      App.getModal('#modal-register');
+      Modal.open();
     });
 
-    login.addEventListener('click', function(event){
+    login.addEventListener('click', (event) =>{
       event.preventDefault();
-      Modal.open(App.getModal('#modal-login'));
+      App.getModal('#modal-login')
+      Modal.open();
     });
 
-    logout.addEventListener('click', function(event, callback){
+    logout.addEventListener('click', (event, callback) =>{
       event.preventDefault();
       User.logout(callback);
       if(callback.response.success = true){

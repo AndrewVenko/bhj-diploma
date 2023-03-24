@@ -11,23 +11,23 @@ const createRequest = (options = {}) => {
         for(let value of Object.entries(data)){
             url += url + value[0] + '=' + value[1];
         };
-        try{
-            xhr.open(method, url);
-            xhr.send();
-        } catch (err){
-            callback(xhr.err);
-        };
     } else{
         let formData = new FormData();
         for (let value of Object.entries(obj)) {
             formData.append(value[0], value[1]);
         };
-        try{
+    };
+
+    try{
+        if(method === 'GET'){
+            xhr.open(method, url);
+            xhr.send();
+        } else{
             xhr.open(method, url);
             xhr.send(formData);
-        } catch (err){
-            callback(xhr.err);
-        };
+        };  
+    } catch (err){
+        callback(xhr.err);
     };
 
     xhr.addEventListener('load', function(){
