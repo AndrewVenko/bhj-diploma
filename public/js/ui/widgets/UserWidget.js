@@ -26,9 +26,8 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-    const user = User.current();
-    if(user){
-      UserWidget['user-name'] = user.name;
+    if(User.current()){
+      this.elemen.user.name = User.current();
     };
   };
 }

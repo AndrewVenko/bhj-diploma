@@ -61,15 +61,13 @@ class User {
       url: this.URL + '/login',
       method: 'POST',
       responseType: 'json',
-      data,
-      callback: (err, response) =>{
-        if (response && response.user) {
-          this.setCurrent(response.user);
-        } else{
-          alert(err);
-        };
-        callback(err, response);
-      },
+      data, 
+    }, 
+    (err, response) =>{
+      if (response && response.user) {
+        this.setCurrent(response.user);
+      };
+      callback(err, response);
     });
   }
 
@@ -84,15 +82,13 @@ class User {
       url: this.URL + '/register',
       method: 'POST',
       data,
-      callback: (err, response) =>{
-        if (response.success === true) {
-          User.setCurrent(data);
-        } else{
-          alert(err.email);
-          alert(err.password);
-        };
-        callback(err, response);
-      },
+      
+    },
+    (err, response) =>{
+      if (response.success === true) {
+        User.setCurrent(data);
+      };
+      callback(err, response);
     });
   };
 
@@ -101,13 +97,15 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(callback) {
-    if(callback.response.success === true){
-      createRequest({
-        url: this.URL + '/logout',
-        method: 'POST',
-        callback: callback(err, response),
-      });
-      User.unsetCurrent();
-    };
+    createRequest({
+      url: this.URL + '/logout',
+      method: 'POST',
+      callback: (err, response) =>{
+        if(response.success === true){
+          User.unsetCurrent();
+        }
+        callback(err, response);
+      },
+    });
   };
 };

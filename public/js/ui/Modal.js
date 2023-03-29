@@ -46,23 +46,19 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    e.addEventlistener('click', function(e){
-      this.e.close();
-    })
+    this.e.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display
    * со значением «block»
    * */
   open() {
-    const modal = App.getModal('#' + this.element.id);
-    modal.style.display = 'block';
+    this.element.style.display = 'block';
   };
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-    const modal = App.getModal('#' + this.element.id);
-    modal.style.display = 'none';
+    this.element.style.display = 'none';
   };
 }

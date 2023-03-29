@@ -17,15 +17,10 @@ const createRequest = (options = {}) => {
             formData.append(value[0], value[1]);
         };
     };
+    xhr.open(method, url);
 
     try{
-        if(method === 'GET'){
-            xhr.open(method, url);
-            xhr.send();
-        } else{
-            xhr.open(method, url);
-            xhr.send(formData);
-        };  
+        xhr.send(method === 'GET' ? null : formData);
     } catch (err){
         callback(xhr.err);
     };

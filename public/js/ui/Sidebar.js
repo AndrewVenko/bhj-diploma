@@ -21,17 +21,8 @@ class Sidebar {
     const bodySidebar = document.body;
     const buttonSidebar = document.querySelector('.sidebar-toggle');
     buttonSidebar.addEventListener('click', () =>{
-      if(bodySidebar.classList.contains('sidebar-open')){
-        bodySidebar.classList.remove.apply(
-          bodySidebar.classList,
-        ['sidebar-open', 'sidebar-collapse']
-      );
-      } else{
-        bodySidebar.classList.add.apply(
-          bodySidebar.classList,
-        ['sidebar-open', 'sidebar-collapse']
-      );
-      };
+      bodySidebar.classList.toggle('sidebar-open');
+      bodySidebar.classList.toggle('sidebar-collapse');
     });
   };
 
@@ -49,22 +40,21 @@ class Sidebar {
 
     register.addEventListener('click', (event) => {
       event.preventDefault();
-      App.getModal('#modal-register');
-      Modal.open();
+      App.getModal('modal-register').open();
     });
 
     login.addEventListener('click', (event) =>{
       event.preventDefault();
-      App.getModal('#modal-login')
-      Modal.open();
+      App.getModal('modal-login').open();
     });
 
-    logout.addEventListener('click', (event, callback) =>{
+    logout.addEventListener('click', (event) =>{
       event.preventDefault();
-      User.logout(callback);
-      if(callback.response.success = true){
-        App.setState('init');
-      };
+      User.logout((response) =>{
+        if(response.success = true){
+          App.setState('init');
+        };
+      });
     });
   }
 }
