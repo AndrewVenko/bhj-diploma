@@ -46,7 +46,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    this.e.close();
+    e.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display

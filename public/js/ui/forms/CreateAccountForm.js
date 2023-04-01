@@ -1,5 +1,3 @@
-const { request } = require("express");
-
 /**
  * Класс CreateAccountForm управляет формой
  * создания нового счёта

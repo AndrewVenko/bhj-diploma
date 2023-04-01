@@ -5,7 +5,6 @@
 const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
     let {url, method, data, callback} = options;
-    xhr.responseType = 'json';
     if(method === 'GET'){
         url += url + '?';
         for(let value of Object.entries(data)){
@@ -22,7 +21,7 @@ const createRequest = (options = {}) => {
     try{
         xhr.send(method === 'GET' ? null : formData);
     } catch (err){
-        callback(xhr.err);
+        options.callback(xhr.err);
     };
 
     xhr.addEventListener('load', function(){

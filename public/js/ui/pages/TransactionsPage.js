@@ -32,13 +32,16 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-    const accountRemove = document.querySelector('.remove-account');
-    const transactionRemove = document.querySelector('.transaction__remove');
-    accountRemove.addEventListener('click', () => {
-      this.removeAccount();
-    });
-    transactionRemove.addEventListener('click', () => {
-      this.removeTransaction(transactionRemove.dataset.id);
+    this.element.addEventListener('click', (event) =>{
+      const elementTarget = event.target;
+      const accountRemove = document.querySelector('.remove-account');
+      const transactionRemove = document.querySelector('.transaction__remove');
+
+      if(elementTarget === accountRemove){
+        this.removeAccount( this.lastOptions);
+      } else if(elementTarget === transactionRemove){
+        this.removeTransaction(transactionRemove.dataset.id);
+      };
     });
   }
 
@@ -53,9 +56,14 @@ class TransactionsPage {
    * */
   removeAccount() {
     if(this.lastOptions){
-      if(confirm('Вы действительно хотите удалить счёт?')){
-        App.updateWidgets();
-        App.updateForms();
+      if(confirm('Вы действительно хотите удалить счёт?') === true){
+        Account.remove(this.element, (err, response) => {
+          if(response.success === true){
+            App.updateWidgets();
+            App.updateForms();
+          };
+        });
+        TransactionsPage.clear();
       };
     };
   }
@@ -67,11 +75,11 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-    if(confirm('Вы действительно хотите удалить эту транзакцию?')){
+    if(confirm('Вы действительно хотите удалить эту транзакцию?') === true){
       if(Transaction.remove(id, (err, response) => {
         if(response.success === true){
           App.update();
-        }
+        };
       }));
     };
   }
@@ -85,10 +93,16 @@ class TransactionsPage {
   render(options){
     if(options){
       this.lastOptions = options;
-      const dataAccount = Account.get();
-      if(dataAccount){
-        this.renderTransactions(this.renderTitle());
-      };
+      Account.get(this.lastOptions.account_id, (err, response) =>{
+        if(response.success === true){
+          const list = Transaction.list(this.element, (err, response) => {
+            if(response.success === true){
+              this.renderTransactions(list);
+              this.renderTitle(response.name);
+            };
+          });
+        };
+      });
     };
   }
 
@@ -130,7 +144,7 @@ class TransactionsPage {
       'ноябрь',
       'декабрь',
     ];
-    const dateFix = `${data.slice(8,10)} + ' ' + ${arraysMonths[+data.slice(5,7) - 1]} + ' ' + ${data.slice(0,4)} + ' г.' + ' в ' + ${data.slice(11,16)}`
+    const dateFix = `${date.slice(8,10)} + ' ' + ${arraysMonths[+date.slice(5,7) - 1]} + ' ' + ${date.slice(0,4)} + ' г.' + ' в ' + ${date.slice(11,16)}`
     return dateFix;
   }
 
@@ -168,20 +182,10 @@ class TransactionsPage {
    * */
   renderTransactions(data){
     const content = document.querySelector('.content');
+    content.textContent = '';
     const arr = data;
     for(let objectData of arr){
-      content.insertAdjacentHTML('beforeend', `
-      <div class="content-wrapper">
-        <section class="content-header">
-          <h1>
-            ${objectData.name}
-          </h1>
-        </section>
-        <section class="content">
-         ${this.getTransactionHTML(objectData)}
-        </section>
-      </div>
-      `)
-    }
-  }
+      content.insertAdjacentHTML('beforeend', `${this.getTransactionHTML(objectData)}`);
+    };
+  };
 }

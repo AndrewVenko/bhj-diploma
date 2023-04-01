@@ -58,7 +58,7 @@ class AccountsWidget {
     const list = Account.list();
     if(list){
       const arrayList = Array.from(list);
-      AccountsWidget.clear();
+      this.clear();
       for(let element of arrayList){
         element.renderItem();
       };
@@ -94,7 +94,7 @@ class AccountsWidget {
       };
     };
     element.classList.add('active');
-    App.showPage( 'transactions', { account_id: id_счёта });
+    App.showPage( 'transactions', { account_id: this.element.id});
   }
 
   /**
@@ -104,7 +104,7 @@ class AccountsWidget {
    * */
   getAccountHTML(item){
     return `
-    <li class="active account" data-id="${item.id}">
+    <li class="account" data-id="${item.id}">
       <a href="#">
          <span>${item.name}</span> /
          <span>${item.sum} + ' ₽'</span>
@@ -121,6 +121,6 @@ class AccountsWidget {
    * */
   renderItem(data){
 
-    data.insertAdjacentHTML(	'beforeend', AccountsWidget.getAccountHTML(this.element));
+    data.insertAdjacentHTML(	'beforeend', this.getAccountHTML(this.element));
   };
 }

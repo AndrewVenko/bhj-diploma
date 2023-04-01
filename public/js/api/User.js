@@ -60,10 +60,9 @@ class User {
     createRequest({
       url: this.URL + '/login',
       method: 'POST',
-      responseType: 'json',
       data, 
     }, 
-    (err, response) =>{
+    callback = (err, response) => {
       if (response && response.user) {
         this.setCurrent(response.user);
       };
@@ -78,18 +77,15 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    createRequest({
-      url: this.URL + '/register',
-      method: 'POST',
-      data,
-      
-    },
-    (err, response) =>{
-      if (response.success === true) {
-        User.setCurrent(data);
-      };
-      callback(err, response);
-    });
+    if(callback.response.success === true){
+      createRequest({
+        url: URL + '/register',
+        method: 'POST',
+        data: data,
+        callback: callback(err, response),
+      });
+      User.setCurrent(data);
+    };
   };
 
   /**

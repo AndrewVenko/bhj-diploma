@@ -96,7 +96,10 @@ class App {
    * App.getModal( 'login' ); // извелекает App.modals.login
    * */
   static getModal(modalName) {
-    return App.modals[modalName];
+    for(let property in App.modals){
+      if(property === modalName)
+      return this.modals.property;
+    }
   }
 
   /**
@@ -135,7 +138,7 @@ class App {
    * и передаёт туда объект options
    * */
   static showPage(pageName, options) {
-    const page = this.getPage(pageName);
+    const page = App.getPage(pageName);
     page.render(options);
   }
 

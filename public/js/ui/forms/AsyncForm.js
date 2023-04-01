@@ -25,7 +25,7 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
-    document.forms[this.element.id].addEventListener('submit', (event) =>{
+    this.element.addEventListener('submit', (event) =>{
       event.preventDefault();
       this.submit();
     });
@@ -39,13 +39,13 @@ class AsyncForm {
    * }
    * */
   getData() {
-    const formData = new FormData(document.forms['new-account-form']);
+    const formData = new FormData(this.element);
     const dataJSON = JSON.stringify(formData);
     return dataJSON;
   };
 
   onSubmit(options){
-
+    
   }
 
   /**
