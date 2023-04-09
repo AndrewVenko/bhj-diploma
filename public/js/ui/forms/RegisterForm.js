@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 /**
  * Класс RegisterForm управляет формой
  * регистрации
@@ -13,9 +11,9 @@ class RegisterForm extends AsyncForm {
    * */
   onSubmit(data) {
     User.register(data, (err, response) => {
-      if(response.succes === true){
+      if(response && response.succes){
         App.setState('user-logged');
-        Modal.close();
+        App.getModal('register').close();
       } else{
         alert(err);
       };

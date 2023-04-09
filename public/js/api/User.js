@@ -39,7 +39,7 @@ class User {
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      callback: (err, response) =>{
+      callback: (err, response) => {
         if (response && response.user) {
           this.setCurrent(response.user);
         } else{
@@ -60,13 +60,13 @@ class User {
     createRequest({
       url: this.URL + '/login',
       method: 'POST',
-      data, 
-    }, 
-    callback = (err, response) => {
-      if (response && response.user) {
-        this.setCurrent(response.user);
-      };
-      callback(err, response);
+      data,
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.setCurrent(response.user);
+        }
+        callback(err, response);
+      }
     });
   }
 
@@ -77,15 +77,17 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    if(callback.response.success === true){
-      createRequest({
-        url: URL + '/register',
-        method: 'POST',
-        data: data,
-        callback: callback(err, response),
-      });
-      User.setCurrent(data);
-    };
+    createRequest({
+      url: this.URL + '/register',
+      method: 'POST',
+      data,
+      callback: (err, response) => {
+        if(response && response.user){
+          this.setCurrent(response.user);
+        };
+        callback(err, response);
+      },
+    });
   };
 
   /**
@@ -96,10 +98,10 @@ class User {
     createRequest({
       url: this.URL + '/logout',
       method: 'POST',
-      callback: (err, response) =>{
-        if(response.success === true){
-          User.unsetCurrent();
-        }
+      callback: (err, response) => {
+        if(response && response.user){
+          this.unsetCurrent(response.user);
+        };
         callback(err, response);
       },
     });

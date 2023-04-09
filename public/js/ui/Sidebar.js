@@ -40,18 +40,18 @@ class Sidebar {
 
     register.addEventListener('click', (event) => {
       event.preventDefault();
-      App.getModal('modal-register').open();
+      App.getModal('register').open();
     });
 
     login.addEventListener('click', (event) =>{
       event.preventDefault();
-      App.getModal('modal-login').open();
+      App.getModal('login').open();
     });
 
     logout.addEventListener('click', (event) =>{
       event.preventDefault();
       User.logout((response) =>{
-        if(response.success = true){
+        if(response.success === true){
           App.setState('init');
         };
       });

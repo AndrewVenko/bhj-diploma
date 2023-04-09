@@ -96,10 +96,7 @@ class App {
    * App.getModal( 'login' ); // извелекает App.modals.login
    * */
   static getModal(modalName) {
-    for(let property in App.modals){
-      if(property === modalName)
-      return this.modals.property;
-    }
+    return App.modals[modalName];
   }
 
   /**

@@ -28,13 +28,13 @@ class AccountsWidget {
    * При нажатии на один из существующих счетов
    * (которые отображены в боковой колонке),
    * вызывает AccountsWidget.onSelectAccount()
-   * */
+   **/
   registerEvents() {
     const create = document.querySelector('.create-account');
     const account = document.querySelectorAll('.account');
     const arrayAccount = Array.from(account);
-    create.addEventListener('click', () =>{
-      App.getModal('modal-new-account');
+    create.addEventListener('click', () => {
+      App.getModal('createAccount').open();
     });
     for(let element of arrayAccount){
       element.addEventListener('click', () =>{
@@ -55,13 +55,17 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
-    const list = Account.list();
-    if(list){
-      const arrayList = Array.from(list);
-      this.clear();
-      for(let element of arrayList){
-        element.renderItem();
-      };
+    const user = User.current();
+    if(user){
+      Account.list(user, (err, response) => {
+        if(response){
+          this.clear();
+          const list = response.list; // ????
+          for(let element of list){
+            element.renderItem();
+          };
+        };
+      });
     };
   }
 
@@ -120,7 +124,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-
-    data.insertAdjacentHTML(	'beforeend', this.getAccountHTML(this.element));
+    data.insertAdjacentHTML('beforeend', this.getAccountHTML(this.element));
   };
 }
