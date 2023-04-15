@@ -11,7 +11,7 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-    if(!element){
+    if(!element) {
       throw new Error('Пустой элемент!');
     };
     this.element = element;
@@ -34,12 +34,9 @@ class TransactionsPage {
   registerEvents() {
     this.element.addEventListener('click', (event) =>{
       const elementTarget = event.target;
-      const accountRemove = document.querySelector('.remove-account');
-      const transactionRemove = document.querySelector('.transaction__remove');
-
-      if(elementTarget === accountRemove){
-        this.removeAccount( this.lastOptions);
-      } else if(elementTarget === transactionRemove){
+      if(elementTarget.closest('.remove-account')){
+        this.removeAccount(this.lastOptions);
+      } else if(elementTarget.closest('.transaction__remove')) {
         this.removeTransaction(transactionRemove.dataset.id);
       };
     });
@@ -56,14 +53,14 @@ class TransactionsPage {
    * */
   removeAccount() {
     if(this.lastOptions){
-      if(confirm('Вы действительно хотите удалить счёт?') === true){
+      if(confirm('Вы действительно хотите удалить счёт?') === true) {
         Account.remove(this.element, (err, response) => {
-          if(response && response.success){
+          if(response && response.success) {
             App.updateWidgets();
             App.updateForms();
           };
         });
-        TransactionsPage.clear();
+        this.clear();
       };
     };
   }
@@ -75,12 +72,12 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-    if(confirm('Вы действительно хотите удалить эту транзакцию?') === true){
-      if(Transaction.remove(id, (err, response) => {
-        if(response && response.success){
+    if(confirm('Вы действительно хотите удалить эту транзакцию?') === true) {
+      Transaction.remove(id, (err, response) => {
+        if(response && response.success) {
           App.update();
         };
-      }));
+      });
     };
   }
 
@@ -93,14 +90,14 @@ class TransactionsPage {
   render(options){
     if(options){
       this.lastOptions = options;
-      Account.get(this.lastOptions.account_id, (err, response) =>{
+      Account.get(this.lastOptions.account_id, (err, response) => {
         if(response && response.success){
-          const list = Transaction.list(this.element, (err, response) => {
-            if(response && response.success){
-              this.renderTransactions(list);
-              this.renderTitle(response.name);
-            };
-          });
+          this.renderTitle(response.name);
+        };
+      });
+      Transaction.list(this.element, (err, response) => {
+        if(response && response.success){
+          this.renderTransactions(response.data.id);
         };
       });
     };
@@ -114,7 +111,7 @@ class TransactionsPage {
   clear() {
     this.renderTransactions([]);
     this.renderTitle('Название счёта');
-    this.lastOptions = '';
+    this.lastOptions = null;
   }
 
   /**

@@ -27,7 +27,7 @@ class UserWidget {
    * */
   update(){
     if(User.current()){
-      this.elemen.user.name = User.current();
+      this.elemen['user-name'] = User.current();
     };
   };
 }

@@ -12,7 +12,7 @@ class Modal {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-    if(!element){
+    if(!element) {
       throw new Error('Пустой элемент!');
     };
     this.element = element;
@@ -28,7 +28,9 @@ class Modal {
     const dismissElements = document.querySelectorAll('[data-dismiss="modal"]');
     const arrayDismissElements = Array.from(dismissElements);
     for(let item of arrayDismissElements){
-      this.onClose(item);
+      item.addEventListener('click', () => {
+       this.onClose();
+      });
     };
    /*  this.element.firs
     data-dismiss
@@ -40,9 +42,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    e.addEventListener('click', () => {
-     this.close();
-    });
+    this.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display

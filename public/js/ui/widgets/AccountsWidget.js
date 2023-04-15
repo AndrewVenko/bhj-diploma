@@ -14,7 +14,7 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    if(!element){
+    if(!element) {
       throw new Error('Пустой элемент!');
     };
     this.element = element;
@@ -38,7 +38,7 @@ class AccountsWidget {
     });
     for(let element of arrayAccount){
       element.addEventListener('click', () =>{
-        AccountsWidget.onSelectAccount();
+        this.onSelectAccount();
       });
     };
   }
@@ -58,10 +58,10 @@ class AccountsWidget {
     const user = User.current();
     if(user){
       Account.list(user, (err, response) => {
-        if(response){
+        if(response === true){
           this.clear();
-          const list = response.list; // ????
-          for(let element of list){
+          const list = response;
+          for(let element of list.data){
             element.renderItem();
           };
         };
@@ -111,7 +111,7 @@ class AccountsWidget {
     <li class="account" data-id="${item.id}">
       <a href="#">
          <span>${item.name}</span> /
-         <span>${item.sum} + ' ₽'</span>
+         <span>${item.sum} ₽</span>
       </a>
     </li>
     `;
@@ -124,6 +124,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-    data.insertAdjacentHTML('beforeend', this.getAccountHTML(this.element));
+    data.insertAdjacentHTML('beforeend', this.getAccountHTML(data));
   };
 }

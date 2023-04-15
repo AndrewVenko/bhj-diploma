@@ -13,7 +13,7 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-    if(!element){
+    if(!element) {
       throw new Error('Пустой элемент!');
     };
     this.element = element;
@@ -40,8 +40,7 @@ class AsyncForm {
    * */
   getData() {
     const formData = new FormData(this.element);
-    const dataJSON = JSON.stringify(formData);
-    return dataJSON;
+    return Object.fromEntries(formData.entries());
   };
 
   onSubmit(options){
@@ -53,7 +52,6 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    const data = this.getData();
-    this.onSubmit(data);
-  }
-}
+    this.onSubmit(this.getData());
+  };
+};

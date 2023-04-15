@@ -19,12 +19,22 @@ class CreateTransactionForm extends AsyncForm {
   renderAccountsList() {
     Account.list(this.element, (err, response) => {
       if(response && response.success){
-        const select = this.element.form.select;
-        select.innerHTML = '';
-        for(let element of select){
-          select.insertAdjacentHTML('beforeend', `
-          <option value="${element.id}">${element.name}</option>
-          `);
+        if(this.element === document.querySelector('#new-expense-form')){
+          const select = document.querySelector('#expense-accounts-list');
+          select.innerHTML = '';
+          for(let element of select){
+           select.insertAdjacentHTML('beforeend', `
+           <option value="${element.id}">${element.name}</option>
+           `);
+          };
+        } else{
+          const select = document.querySelector('#income-accounts-list');
+          select.innerHTML = '';
+          for(let element of select){
+           select.insertAdjacentHTML('beforeend', `
+           <option value="${element.id}">${element.name}</option>
+           `);
+          };
         };
       };
     });
