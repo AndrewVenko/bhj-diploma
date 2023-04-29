@@ -15,7 +15,7 @@ class UserWidget {
     if(!element){
       throw new Error('Пустой элемент!');
     };
-    this.elemen = element;
+    this.element = element;
   }
 
   /**
@@ -27,7 +27,8 @@ class UserWidget {
    * */
   update(){
     if(User.current()){
-      this.elemen['user-name'] = User.current();
+      const userName = document.querySelector('.user-name');
+      userName.textContent = User.current().name;
     };
   };
 }

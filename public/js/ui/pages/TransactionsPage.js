@@ -33,11 +33,12 @@ class TransactionsPage {
    * */
   registerEvents() {
     this.element.addEventListener('click', (event) =>{
-      const elementTarget = event.target;
-      if(elementTarget.closest('.remove-account')){
-        this.removeAccount(this.lastOptions);
-      } else if(elementTarget.closest('.transaction__remove')) {
-        this.removeTransaction(transactionRemove.dataset.id);
+      const removeAccount = document.querySelector('.remove-account');
+      const removeTransaction = document.querySelector('.transaction__remove');
+      if(event.target === removeAccount){
+        this.removeAccount();
+      } else if(event.target === removeTransaction) {
+        this.removeTransaction(removeTransaction.dataset.id);
       };
     });
   }
@@ -97,7 +98,7 @@ class TransactionsPage {
       });
       Transaction.list(this.element, (err, response) => {
         if(response && response.success){
-          this.renderTransactions(response.data.id);
+          this.renderTransactions(response.data);
         };
       });
     };

@@ -30,17 +30,14 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    **/
   registerEvents() {
-    const create = document.querySelector('.create-account');
-    const account = document.querySelectorAll('.account');
-    const arrayAccount = Array.from(account);
-    create.addEventListener('click', () => {
-      App.getModal('createAccount').open();
+    this.element.addEventListener('click', (event) => {
+      const create = document.querySelector('.create-account');
+      if(event.target === create){
+        App.getModal('createAccount').open();
+      } else if(event.target.classList === 'account'){
+        this.onSelectAccount(event.target);
+      };
     });
-    for(let element of arrayAccount){
-      element.addEventListener('click', () =>{
-        this.onSelectAccount();
-      });
-    };
   }
   
 
@@ -58,11 +55,11 @@ class AccountsWidget {
     const user = User.current();
     if(user){
       Account.list(user, (err, response) => {
-        if(response === true){
+        if(response && response.success){
           this.clear();
           const list = response;
           for(let element of list.data){
-            element.renderItem();
+            this.renderItem(element);
           };
         };
       });
@@ -98,7 +95,7 @@ class AccountsWidget {
       };
     };
     element.classList.add('active');
-    App.showPage( 'transactions', { account_id: this.element.id});
+    App.showPage( 'transactions', { account_id: this.element.id });
   }
 
   /**
@@ -124,6 +121,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-    data.insertAdjacentHTML('beforeend', this.getAccountHTML(data));
+    this.element.insertAdjacentHTML('beforeend', this.getAccountHTML(data));
   };
 }

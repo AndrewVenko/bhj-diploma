@@ -18,23 +18,19 @@ class CreateTransactionForm extends AsyncForm {
    * */
   renderAccountsList() {
     Account.list(this.element, (err, response) => {
-      if(response && response.success){
-        if(this.element === document.querySelector('#new-expense-form')){
+      if(response && response.success) {
+        if(this.element.id === 'new-expense-form') {
           const select = document.querySelector('#expense-accounts-list');
           select.innerHTML = '';
-          for(let element of select){
-           select.insertAdjacentHTML('beforeend', `
-           <option value="${element.id}">${element.name}</option>
-           `);
-          };
-        } else{
+          select.innerHTML = response.data.reduce((accumulator, item) =>
+            accumulator + `<option value="${item.id}">${item.name}</option>`
+          );
+        } else if(this.element.id === 'new-income-form') {
           const select = document.querySelector('#income-accounts-list');
           select.innerHTML = '';
-          for(let element of select){
-           select.insertAdjacentHTML('beforeend', `
-           <option value="${element.id}">${element.name}</option>
-           `);
-          };
+          select.innerHTML = response.data.reduce((accumulator, item) =>
+            accumulator + `<option value="${item.id}">${item.name}</option>`
+          );
         };
       };
     });
@@ -49,8 +45,12 @@ class CreateTransactionForm extends AsyncForm {
   onSubmit(data) {
     Transaction.create(data, (err, response) => {
       if(response && response.success){
-        App.getModal('transactions').close();
         App.update();
+        if(this.element.id === 'new-income-form'){
+          App.getModal('newIncome').close();
+        } else if(this.element.id === 'new-expense-form'){
+          App.getModal('newExpense').close();
+        };
       };
     });
   };

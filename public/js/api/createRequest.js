@@ -20,11 +20,7 @@ const createRequest = (options = {}) => {
     xhr.open(method, url);
 
     xhr.addEventListener('load', () => {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            callback(null, xhr.response);
-        } else {
-            callback(new Error(`Request failed: ${xhr.status} ${xhr.statusText}`));
-        };
+        callback(null, xhr.response);
     });
 
     xhr.addEventListener('error', () => {
