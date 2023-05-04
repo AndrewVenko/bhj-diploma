@@ -32,13 +32,13 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-    this.element.addEventListener('click', (event) =>{
+    this.element.addEventListener('click', (event) => {
       const removeAccount = document.querySelector('.remove-account');
-      const removeTransaction = document.querySelector('.transaction__remove');
+      const removeTransactions = document.querySelectorAll('.transaction__remove');
       if(event.target === removeAccount){
         this.removeAccount();
-      } else if(event.target === removeTransaction) {
-        this.removeTransaction(removeTransaction.dataset.id);
+      } else if(event.target === removeTransactions) {
+        this.removeTransaction(removeTransaction.getAttribute('data-id'));
       };
     });
   }
@@ -72,7 +72,7 @@ class TransactionsPage {
    * По удалению транзакции вызовите метод App.update(),
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
-  removeTransaction( id ) {
+  removeTransaction(id) {
     if(confirm('Вы действительно хотите удалить эту транзакцию?') === true) {
       Transaction.remove(id, (err, response) => {
         if(response && response.success) {
@@ -91,9 +91,12 @@ class TransactionsPage {
   render(options){
     if(options){
       this.lastOptions = options;
+      console.log(options);
       Account.get(this.lastOptions.account_id, (err, response) => {
+        console.log(this.element);
+        console.log(response);
         if(response && response.success){
-          this.renderTitle(response.name);
+          this.renderTitle(response.data.name);
         };
       });
       Transaction.list(this.element, (err, response) => {

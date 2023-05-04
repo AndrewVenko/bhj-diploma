@@ -23,13 +23,13 @@ class CreateTransactionForm extends AsyncForm {
           const select = document.querySelector('#expense-accounts-list');
           select.innerHTML = '';
           select.innerHTML = response.data.reduce((accumulator, item) =>
-            accumulator + `<option value="${item.id}">${item.name}</option>`
+            accumulator + `<option value="${item.id}">${item.name}</option>`, ''
           );
         } else if(this.element.id === 'new-income-form') {
           const select = document.querySelector('#income-accounts-list');
           select.innerHTML = '';
           select.innerHTML = response.data.reduce((accumulator, item) =>
-            accumulator + `<option value="${item.id}">${item.name}</option>`
+            accumulator + `<option value="${item.id}">${item.name}</option>`, ''
           );
         };
       };

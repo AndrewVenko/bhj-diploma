@@ -306,6 +306,15 @@
       "account_id": "gbc65aax0lgzagsck",
       "user_id": "gbc65aiiklgew4alq",
       "created_at": "2023-04-28T12:24:29.017Z"
+    },
+    {
+      "id": "gbc65akg8lh4o6a2f",
+      "type": "income",
+      "name": "работа",
+      "sum": 10000,
+      "account_id": "gbc65aax0lgzagsck",
+      "user_id": "gbc65aiiklgew4alq",
+      "created_at": "2023-05-01T10:00:14.198Z"
     }
   ]
 }
