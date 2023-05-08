@@ -55,7 +55,7 @@ class TransactionsPage {
   removeAccount() {
     if(this.lastOptions){
       if(confirm('Вы действительно хотите удалить счёт?') === true) {
-        Account.remove(this.element, (err, response) => {
+        Account.remove({id: this.lastOptions.account_id}, (err, response) => {
           if(response && response.success) {
             App.updateWidgets();
             App.updateForms();
@@ -91,10 +91,7 @@ class TransactionsPage {
   render(options){
     if(options){
       this.lastOptions = options;
-      console.log(options);
       Account.get(this.lastOptions.account_id, (err, response) => {
-        console.log(this.element);
-        console.log(response);
         if(response && response.success){
           this.renderTitle(response.data.name);
         };
@@ -170,7 +167,7 @@ class TransactionsPage {
       </div>
      </div>
      <div class="col-md-2 transaction__controls">
-        <button class="btn btn-danger transaction__remove" data-id="${data.id}">
+        <button class="btn btn-danger transaction__remove" data-id="${item.id}">
             <i class="fa fa-trash"></i>  
         </button>
      </div>

@@ -18,21 +18,13 @@ class CreateTransactionForm extends AsyncForm {
    * */
   renderAccountsList() {
     Account.list(this.element, (err, response) => {
-      if(response && response.success) {
-        if(this.element.id === 'new-expense-form') {
-          const select = document.querySelector('#expense-accounts-list');
-          select.innerHTML = '';
-          select.innerHTML = response.data.reduce((accumulator, item) =>
+      if (response && response.success) {
+        const select = this.element.querySelector('.accounts-select');
+        select.innerHTML = '';
+        select.innerHTML = response.data.reduce((accumulator, item) =>
             accumulator + `<option value="${item.id}">${item.name}</option>`, ''
-          );
-        } else if(this.element.id === 'new-income-form') {
-          const select = document.querySelector('#income-accounts-list');
-          select.innerHTML = '';
-          select.innerHTML = response.data.reduce((accumulator, item) =>
-            accumulator + `<option value="${item.id}">${item.name}</option>`, ''
-          );
-        };
-      };
+        );
+      }
     });
   }
 

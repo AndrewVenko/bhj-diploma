@@ -39,20 +39,6 @@
       "id": "3"
     },
     {
-      "name": "1",
-      "user_id": "gbc65aiiklgew4alq",
-      "id": "gbc65ajq8lgf8re76"
-    },
-    {
-      "name": "новый счет",
-      "user_id": "gbc65aiiklgew4alq",
-      "id": "gbc65aax0lgzagsck"
-    },
-    {
-      "user_id": "gbc65aiiklgew4alq",
-      "id": "gbc65a7g0lgzb4a0m"
-    },
-    {
       "name": "сбербанк",
       "user_id": "gbc65aiiklgew4alq",
       "id": "gbc65aa88lh0fhaih"
@@ -200,60 +186,6 @@
       "user_id": "1"
     },
     {
-      "id": "gbc65aljglh0ia8ib",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 50000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:04:16.402Z"
-    },
-    {
-      "id": "gbc65a27slh0idgud",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 50000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:06:47.172Z"
-    },
-    {
-      "id": "gbc65ai1wlh0iflib",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 50000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:08:26.530Z"
-    },
-    {
-      "id": "gbc65a9tslh0ih0d5",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 500000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:09:32.440Z"
-    },
-    {
-      "id": "gbc65afpglh0ih302",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 500000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:09:35.857Z"
-    },
-    {
-      "id": "gbc65agj8lh0it5g7",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 500000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:18:58.902Z"
-    },
-    {
       "id": "gbc65a6qglh0iu7h7",
       "type": "income",
       "name": "зарплата",
@@ -263,58 +195,58 @@
       "created_at": "2023-04-28T12:19:48.186Z"
     },
     {
-      "id": "gbc65a8g4lh0ivvum",
+      "id": "gbc65a3jglheq0na7",
       "type": "income",
-      "name": "зарплата",
-      "sum": 500000,
-      "account_id": "gbc65aax0lgzagsck",
+      "name": "что-то",
+      "sum": 1000,
+      "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:21:06.429Z"
+      "created_at": "2023-05-08T10:49:32.382Z"
     },
     {
-      "id": "gbc65aa8clh0iysti",
-      "type": "expense",
-      "name": "жилье",
-      "sum": 5000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:23:22.469Z"
-    },
-    {
-      "id": "gbc65afnwlh0iz08c",
-      "type": "expense",
-      "name": "жилье",
-      "sum": 5000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:23:32.075Z"
-    },
-    {
-      "id": "gbc65acyklh0j03ye",
+      "id": "gbc65a5bglhex3d2g",
       "type": "income",
-      "name": "зарплата",
-      "sum": 500000,
-      "account_id": "gbc65aax0lgzagsck",
+      "name": "что-то",
+      "sum": 1000,
+      "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:24:23.557Z"
+      "created_at": "2023-05-08T14:07:36.423Z"
     },
     {
-      "id": "gbc65aarglh0j0862",
-      "type": "expense",
-      "name": "жилье",
-      "sum": 5000,
-      "account_id": "gbc65aax0lgzagsck",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-04-28T12:24:29.017Z"
-    },
-    {
-      "id": "gbc65akg8lh4o6a2f",
+      "id": "gbc65afj0lhex480a",
       "type": "income",
       "name": "работа",
-      "sum": 10000,
-      "account_id": "gbc65aax0lgzagsck",
+      "sum": 1000,
+      "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-01T10:00:14.198Z"
+      "created_at": "2023-05-08T14:08:16.521Z"
+    },
+    {
+      "id": "gbc65a9tclhex93pm",
+      "type": "income",
+      "name": "работа",
+      "sum": 1000,
+      "account_id": "gbc65aloolh0ihtna",
+      "user_id": "gbc65aiiklgew4alq",
+      "created_at": "2023-05-08T14:12:04.233Z"
+    },
+    {
+      "id": "gbc65agrglhex9sl4",
+      "type": "expense",
+      "name": "покупки",
+      "sum": 50000,
+      "account_id": "gbc65aa88lh0fhaih",
+      "user_id": "gbc65aiiklgew4alq",
+      "created_at": "2023-05-08T14:12:36.471Z"
+    },
+    {
+      "id": "gbc65acc4lheyt314",
+      "type": "expense",
+      "name": "покупки",
+      "sum": 50000,
+      "account_id": "gbc65aa88lh0fhaih",
+      "user_id": "gbc65aiiklgew4alq",
+      "created_at": "2023-05-08T14:55:36.087Z"
     }
   ]
 }

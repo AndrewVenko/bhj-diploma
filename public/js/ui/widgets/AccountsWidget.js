@@ -85,7 +85,7 @@ class AccountsWidget {
    * счёта класс .active.
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
-  onSelectAccount( element ) {
+  onSelectAccount( event ) {
     const account = document.querySelectorAll('.account');
     const arraysAccount = Array.from(account);
     for(let item of arraysAccount){
@@ -93,8 +93,9 @@ class AccountsWidget {
         item.classList.remove('active');
       };
     };
-    element.classList.add('active');
-    App.showPage( 'transactions', { account_id: this.element.id });
+    event.closest('.account').classList.add('active');
+    const accountId = event.closest('.account').getAttribute('data-id');
+    App.showPage( 'transactions', { account_id: accountId });
   }
 
   /**
