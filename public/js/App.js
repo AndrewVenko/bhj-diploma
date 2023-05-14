@@ -96,7 +96,7 @@ class App {
    * App.getModal( 'login' ); // извелекает App.modals.login
    * */
   static getModal(modalName) {
-    return App.modals[modalName];
+    return this.modals[modalName];
   }
 
   /**
@@ -191,6 +191,7 @@ class App {
    * метод update()
    * */
   static updatePages() {
+    console.log(this.pages.transactions);
     this.getPage("transactions").update();
   }
 
@@ -199,6 +200,8 @@ class App {
    * accounts и user
    * */
   static updateWidgets() {
+    console.log(this.widgets.accounts);
+    console.log(this.widgets.user);
     this.getWidget("accounts").update();
     this.getWidget("user").update();
   }

@@ -42,11 +42,6 @@
       "name": "сбербанк",
       "user_id": "gbc65aiiklgew4alq",
       "id": "gbc65aa88lh0fhaih"
-    },
-    {
-      "name": "тиньков",
-      "user_id": "gbc65aiiklgew4alq",
-      "id": "gbc65aloolh0ihtna"
     }
   ],
   "transactions": [
@@ -195,58 +190,22 @@
       "created_at": "2023-04-28T12:19:48.186Z"
     },
     {
-      "id": "gbc65a3jglheq0na7",
+      "id": "gbc65a1fklhnege5i",
       "type": "income",
-      "name": "что-то",
-      "sum": 1000,
-      "account_id": "gbc65aa88lh0fhaih",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T10:49:32.382Z"
-    },
-    {
-      "id": "gbc65a5bglhex3d2g",
-      "type": "income",
-      "name": "что-то",
-      "sum": 1000,
-      "account_id": "gbc65aa88lh0fhaih",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T14:07:36.423Z"
-    },
-    {
-      "id": "gbc65afj0lhex480a",
-      "type": "income",
-      "name": "работа",
-      "sum": 1000,
-      "account_id": "gbc65aa88lh0fhaih",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T14:08:16.521Z"
-    },
-    {
-      "id": "gbc65a9tclhex93pm",
-      "type": "income",
-      "name": "работа",
-      "sum": 1000,
-      "account_id": "gbc65aloolh0ihtna",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T14:12:04.233Z"
-    },
-    {
-      "id": "gbc65agrglhex9sl4",
-      "type": "expense",
-      "name": "покупки",
+      "name": "зарплата",
       "sum": 50000,
       "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T14:12:36.471Z"
+      "created_at": "2023-05-14T12:35:47.237Z"
     },
     {
-      "id": "gbc65acc4lheyt314",
+      "id": "gbc65aeh8lhnesyr7",
       "type": "expense",
-      "name": "покупки",
-      "sum": 50000,
+      "name": "на еду",
+      "sum": 1000,
       "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-08T14:55:36.087Z"
+      "created_at": "2023-05-14T12:45:33.810Z"
     }
   ]
 }

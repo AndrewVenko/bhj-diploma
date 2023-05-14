@@ -33,12 +33,15 @@ class TransactionsPage {
    * */
   registerEvents() {
     this.element.addEventListener('click', (event) => {
-      const removeAccount = document.querySelector('.remove-account');
-      const removeTransactions = document.querySelectorAll('.transaction__remove');
-      if(event.target === removeAccount){
+      const removeAccount = event.target.closest('.remove-account');
+      
+      if(removeAccount){
         this.removeAccount();
-      } else if(event.target === removeTransactions) {
-        this.removeTransaction(removeTransaction.getAttribute('data-id'));
+      }
+
+      const removeTransactions = event.target.closest('.transaction__remove');
+      if(removeTransactions) {
+        this.removeTransaction(removeTransactions.dataset.id);
       };
     });
   }
@@ -54,7 +57,7 @@ class TransactionsPage {
    * */
   removeAccount() {
     if(this.lastOptions){
-      if(confirm('Вы действительно хотите удалить счёт?') === true) {
+      if(confirm('Вы действительно хотите удалить счёт?')) {
         Account.remove({id: this.lastOptions.account_id}, (err, response) => {
           if(response && response.success) {
             App.updateWidgets();
@@ -73,8 +76,8 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction(id) {
-    if(confirm('Вы действительно хотите удалить эту транзакцию?') === true) {
-      Transaction.remove(id, (err, response) => {
+    if(confirm('Вы действительно хотите удалить эту транзакцию?')) {
+      Transaction.remove({id: id}, (err, response) => {
         if(response && response.success) {
           App.update();
         };
@@ -96,7 +99,8 @@ class TransactionsPage {
           this.renderTitle(response.data.name);
         };
       });
-      Transaction.list(this.element, (err, response) => {
+      const params = { account_id: this.lastOptions.account_id };
+      Transaction.list(params, (err, response) => {
         if(response && response.success){
           this.renderTransactions(response.data);
         };
@@ -128,7 +132,7 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    const arraysMonths = [
+    const months = [
       'январь',
       'февраль',
       'март',
@@ -142,8 +146,8 @@ class TransactionsPage {
       'ноябрь',
       'декабрь',
     ];
-    const dateFix = `${date.slice(8,10)} + ' ' + ${arraysMonths[+date.slice(5,7) - 1]} + ' ' + ${date.slice(0,4)} + ' г.' + ' в ' + ${date.slice(11,16)}`
-    return dateFix;
+    const formattedDate = `${parseInt(date.slice(8,10))} ${months[parseInt(date.slice(5,7)) - 1]} ${date.slice(0,4)} г. в ${date.slice(11,16)}`;
+    return formattedDate;
   }
 
   /**
@@ -151,7 +155,7 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML(item){
-    `<div class="transaction transaction_${item.type} row">
+    return `<div class="transaction transaction_${item.type} row">
      <div class="col-md-7 transaction__details">
       <div class="transaction__icon">
           <span class="fa fa-money fa-2x"></span>
