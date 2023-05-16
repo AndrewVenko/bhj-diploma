@@ -188,24 +188,6 @@
       "account_id": "gbc65aa88lh0fhaih",
       "user_id": "gbc65aiiklgew4alq",
       "created_at": "2023-04-28T12:19:48.186Z"
-    },
-    {
-      "id": "gbc65a1fklhnege5i",
-      "type": "income",
-      "name": "зарплата",
-      "sum": 50000,
-      "account_id": "gbc65aa88lh0fhaih",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-14T12:35:47.237Z"
-    },
-    {
-      "id": "gbc65aeh8lhnesyr7",
-      "type": "expense",
-      "name": "на еду",
-      "sum": 1000,
-      "account_id": "gbc65aa88lh0fhaih",
-      "user_id": "gbc65aiiklgew4alq",
-      "created_at": "2023-05-14T12:45:33.810Z"
     }
   ]
 }

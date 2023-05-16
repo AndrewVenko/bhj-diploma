@@ -62,6 +62,7 @@ class TransactionsPage {
           if(response && response.success) {
             App.updateWidgets();
             App.updateForms();
+            this.render(this.lastOptions);
           };
         });
         this.clear();
@@ -80,6 +81,7 @@ class TransactionsPage {
       Transaction.remove({id: id}, (err, response) => {
         if(response && response.success) {
           App.update();
+          this.render(this.lastOptions);
         };
       });
     };
